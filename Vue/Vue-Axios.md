@@ -140,10 +140,5 @@ export function request(config) {
 ```
 
 
-
 在其他组件想要进行网络请求的时候，只需要引用该文件，调用 request 方法就可以。如果以后出现其他的第三方框架，只需要改动 request.js 文件即可，将异步操作包裹进 Promise 中并 return 出去，不影响其他地方使用
-
-
-
-
 

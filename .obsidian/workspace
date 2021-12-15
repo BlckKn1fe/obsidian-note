@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "bc24896d2855c786",
+        "id": "a2d7a2b7d868e1f3",
         "type": "leaf",
         "state": {
           "type": "empty",
@@ -36,7 +36,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#后端",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -71,7 +71,7 @@
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": false
+                "unlinkedCollapsed": true
               }
             }
           },
@@ -82,18 +82,44 @@
               "type": "git-view",
               "state": {}
             }
+          },
+          {
+            "id": "45f5fdc96bda853f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "6c6633b6b509776f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
           }
         ],
         "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 231
   },
-  "active": "bc24896d2855c786",
+  "active": "a2d7a2b7d868e1f3",
   "lastOpenFiles": [
-    "README.md",
-    "Vue快速入门.md",
-    "Promise.md"
+    "obsidian/Templater 使用方法.md",
+    "Template.md",
+    "template/front-matter-demo.md",
+    "template/front-matter.md",
+    "MyFilename.md",
+    "MyFilename 1.md",
+    "template/file-template.md",
+    "Vue/Vue-Axios.md",
+    "Java/Tomcat和Servlet.md",
+    "Font-End/Promise.md"
   ]
 }
