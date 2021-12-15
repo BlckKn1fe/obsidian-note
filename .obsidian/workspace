@@ -1,0 +1,99 @@
+{
+  "main": {
+    "id": "4585aa9d055171c6",
+    "type": "split",
+    "children": [
+      {
+        "id": "bc24896d2855c786",
+        "type": "leaf",
+        "state": {
+          "type": "empty",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "09b687d736f2a7a9",
+    "type": "split",
+    "children": [
+      {
+        "id": "0415dcb8d9c05b91",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8e7b98aef2b52077",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "c52f4fc7b481454b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "dafa3f9bd55986ba",
+    "type": "split",
+    "children": [
+      {
+        "id": "2e5f41fa284867d2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8edf25ffae6b4fdf",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "4e2ff23ea2b671cb",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "active": "bc24896d2855c786",
+  "lastOpenFiles": [
+    "README.md",
+    "Vue快速入门.md",
+    "Promise.md"
+  ]
+}
