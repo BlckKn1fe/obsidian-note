@@ -1,3 +1,13 @@
+---
+creation date: 2021-6-1 0:00
+title: Vue-Axios
+categories:
+- front-end
+tags:
+- front-end
+- vue
+---
+
 # Vue Router
 
 通过 CLI 创建项目后，如果启用 router，则会多出一个 router 的文件夹，里面的 `index.js` 就是用来配置路由映射的，并且它在全局注册了两个组件：`<router-link>` 和 `<router-view>`，前者是用来跳转页面，修改 url 的，而后者是用来做组件展示的

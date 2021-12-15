@@ -1,3 +1,13 @@
+---
+creation date: 2021-6-1 0:00
+title: Vue-Axios
+categories:
+- front-end
+tags:
+- front-end
+- vue
+---
+
 组件化让我们开发出一个个独立可服用的小组件来构建应用，有更好的维护性和扩展性
 
 ![image-20210405063614345](R:/mdImages/image-20210405063614345.png)
@@ -572,6 +582,8 @@ const app = new Vue({
   </cpn>
 </div>
 ```
+
+^6c84d3
 
 
 

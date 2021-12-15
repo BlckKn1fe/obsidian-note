@@ -4,11 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "a2d7a2b7d868e1f3",
+        "id": "723b1c0529fece82",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "Vue/Vue快速入门.md",
+            "mode": "preview",
+            "source": false
+          }
         }
       }
     ],
@@ -36,7 +40,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#后端",
+                "query": "tag:#task",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -65,13 +69,14 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Vue/Vue快速入门.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
+                "unlinkedCollapsed": false
               }
             }
           },
@@ -99,6 +104,16 @@
             "type": "leaf",
             "state": {
               "type": "outline",
+              "state": {
+                "file": "Vue/Vue快速入门.md"
+              }
+            }
+          },
+          {
+            "id": "bd3247f4bb499457",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
               "state": {}
             }
           }
@@ -107,19 +122,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 231
+    "width": 563.5
   },
-  "active": "a2d7a2b7d868e1f3",
+  "active": "723b1c0529fece82",
   "lastOpenFiles": [
-    "obsidian/Templater 使用方法.md",
-    "Template.md",
-    "template/front-matter-demo.md",
-    "template/front-matter.md",
-    "MyFilename.md",
-    "MyFilename 1.md",
-    "template/file-template.md",
+    "Vue/Vue快速入门.md",
     "Vue/Vue-Axios.md",
-    "Java/Tomcat和Servlet.md",
-    "Font-End/Promise.md"
+    "未命名.md",
+    "days/2021-12-14.md",
+    "days/day_template.md",
+    "obsidian/Templater 使用方法.md",
+    "Tasks 使用方法.md",
+    "Vue/Vue组件化.md",
+    "Template.md",
+    "days/Test.md"
   ]
 }

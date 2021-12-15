@@ -1,3 +1,13 @@
+---
+creation date: 2021-6-1 0:00
+title: Vue-Axios
+categories:
+- front-end
+tags:
+- front-end
+- vue
+---
+
 在写 Vue Demo 相关的内容，是不需要使用 Vue CLI 的，但是如果想要开发相对大型一点的程序的时候，就需要使用到 Vue CLI，因为开发大项目时，我们需要考虑代码目录结构、项目部署、热加载、单元测试等等问题。
 
 CLI 全称为 Command-Line Interface，它可以帮助我们快速的生成基本的目录结构，基本的一些配置，Vue CLI 可以快速搭建 Vue 开发环境以及对应的 webpack 配置

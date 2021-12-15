@@ -1,3 +1,20 @@
+---
+creation date: 2021-6-1 0:00
+title: Vue-Axios
+categories:
+  - front-end
+tags:
+  - front-end
+  - vue
+last modified: 2021-12-14 23:39
+---
+
+进阶导航：
+[[Vue组件化]]
+[[VueCLI]]
+[[VueRouter]]
+[[Vue-Axios]]
+[[Vuex]]
 
 # 快速开始
 
@@ -8,8 +25,6 @@ https://cn.vuejs.org/v2/api/#%e9%80%89%e9%a1%b9-%e6%95%b0%e6%8d%ae
 ```
 
 其中有对 data，methods 等选项的进一步说明
-
-
 
 ## Hello World
 
@@ -40,8 +55,6 @@ https://cn.vuejs.org/v2/api/#%e9%80%89%e9%a1%b9-%e6%95%b0%e6%8d%ae
 
 **使用简洁的模板语法把数据渲染到页面上**
 
-
-
 ## 列表展示
 
 ```html
@@ -64,9 +77,7 @@ https://cn.vuejs.org/v2/api/#%e9%80%89%e9%a1%b9-%e6%95%b0%e6%8d%ae
 </body>
 ```
 
-在控制台可以通过 ```app.movies.push("Name")``` 的方式实现响应式添加
-
-
+在控制台可以通过 `app.movies.push("Name")` 的方式实现响应式添加
 
 ## 计数器
 
@@ -106,10 +117,6 @@ https://cn.vuejs.org/v2/api/#%e9%80%89%e9%a1%b9-%e6%95%b0%e6%8d%ae
 </body>
 ```
 
-
-
-
-
 # MVVM
 
 ![](https://images-1259064069.cos.ap-guangzhou.myqcloud.com/images/20210417122045.png)
@@ -132,27 +139,19 @@ https://cn.vuejs.org/v2/api/#%e9%80%89%e9%a1%b9-%e6%95%b0%e6%8d%ae
 - 实现了 Data Binding，可以把 Model 的改变实时反映到 View 中
 - 实现了 DOM Listener，监听各类事件，回调函数
 
-
-
-
-
 # 基础选项
 
 选项就是创建 Vue 实力对线的时候，设定的一些属性，比如 el 挂载点，data，methods 等
 
-
-
 - **el：**
-  - 类型：string | HTMLElement
-  - 作用：绑定 DOM 节点
+	- 类型：string | HTMLElement
+	- 作用：绑定 DOM 节点
 - **data：**
-  - 类型：Object | Function（组件中的 data 必须是一个函数）
-  - 作用：Vue 实例对应的数据
+	- 类型：Object | Function（组件中的 data 必须是一个函数）
+	- 作用：Vue 实例对应的数据
 - **methods：**
-  - 类型：{ [key : string] : Function}
-  - 作用：定义属于 Vue 实例对象的方法
-
-
+	- 类型：{ [key : string] : Function}
+	- 作用：定义属于 Vue 实例对象的方法
 
 # 生命周期
 
@@ -182,15 +181,11 @@ cont app = new Vue({
 })
 ```
 
-
-
 # 基础语法
-
-
 
 ## 插值操作
 
-把 Vue 对象中的数据，插入到 DOM 节点中，在 Vue 中的 ```{{}}``` 属于 Mustache 语法，Mustache 中文释义为胡须
+把 Vue 对象中的数据，插入到 DOM 节点中，在 Vue 中的 `{{}}` 属于 Mustache 语法，Mustache 中文释义为胡须
 
 Mustache 语法中，不仅可以写变量，还可以写简单的表达式
 
@@ -202,96 +197,80 @@ Mustache 语法中，不仅可以写变量，还可以写简单的表达式
 </div>
 ```
 
-
-
 插值操作中有一些指令可以对值进行操作
 
 1. **v-once**：固定得到的值，取消其响应式
 
-   ```html
-   <!-- 更改 message 的值，显示不会有改变 -->
-   <h2 v-once>{{message}}</h2>
-   ```
-
-   
+		```html
+		<!-- 更改 message 的值，显示不会有改变 -->
+		<h2 v-once>{{message}}</h2>
+		```
 
 2. **v-html**: 解析 HTML 字符串
 
-   有时后端会之间传来一串这样的字符串：
+		有时后端会之间传来一串这样的字符串：
 
-   ```javascript
-   url: '<a href="https://www.baidu.com">百度一下</a>'
-   ```
+		```javascript
+		url: '<a href="https://www.baidu.com">百度一下</a>'
+		```
 
-   这时候需要正确的解析，需要在标签上添加该指令
+		这时候需要正确的解析，需要在标签上添加该指令
 
-   ```html
-   <h2 v-html="url"></h2>
-   ```
-
-   
+		```html
+		<h2 v-html="url"></h2>
+		```
 
 3. **v-text**: 和 {{}} 的使用基本一样
 
-   ```html
-   <h2 v-text="message"> content </h2>
-   ```
+		```html
+		<h2 v-text="message"> content </h2>
+		```
 
-   比较少用这个，，同时标签内 content 会被覆盖
-
-   
+		比较少用这个，，同时标签内 content 会被覆盖
 
 4. **v-pre**: 标签内有什么就展示什么，清除所有其他的特殊语法
 
-   ```html
-   <!-- 这个正常解析 message 的值 -->
-   <h2>{{message}}</h2>
-   <!-- 这个展示出来的就是 {{message}} 在页面上 -->
-   <h2 v-pre>{{message}}</h2>
-   ```
-
-   
+		```html
+		<!-- 这个正常解析 message 的值 -->
+		<h2>{{message}}</h2>
+		<!-- 这个展示出来的就是 {{message}} 在页面上 -->
+		<h2 v-pre>{{message}}</h2>
+		```
 
 5. **v-cloak**: 这是一个需要手动设置的标签属性，其主要作用是，防止 JS 代码加载缓慢而导致不友好内容展示给用户。当 Vue 实例对象找到对应节点后，会去除掉这一条属性
 
-   ```html
-   <head>
-     <style>
-       [v-cloak] {
-         display: none;
-       }
-     </style>
-   </head>
-   <body>
-   
-   <div id="app" v-cloak>
-     <h2>{{message}}</h2>
-   </div>
-   ```
+		```html
+		<head>
+		  <style>
+		    [v-cloak] {
+		      display: none;
+		    }
+		  </style>
+		</head>
+		<body>
 
-
+		<div id="app" v-cloak>
+		  <h2>{{message}}</h2>
+		</div>
+		```
 
 ## 属性绑定
 
 绑定属性主要用来动态的修改标签的某些属性，比如动态的修改 a 标签的 href 属性，动态绑定 img 标签的 src 属性等等
 
-
-
 - v-bind：绑定 Vue 实例中的某一条数据到对应的属性上
 
-  ```html
-  <!-- imgSrc 为 Vue 实例的 data 中的一条数据 -->
-  <img v-bind:src="imgSrc" alt="">
-  ```
+	```html
+	<!-- imgSrc 为 Vue 实例的 data 中的一条数据 -->
+	<img v-bind:src="imgSrc" alt="">
+	```
 
 - 语法糖：由于其使用频率很高，有很简介的写法
 
-  ```html
-  <!-- imgSrc 为 Vue 实例的 data 中的一条数据 -->
-  <img :src="imgSrc" alt="">
-  ```
-
-
+	```html
+	<!-- imgSrc 为 Vue 实例的 data 中的一条数据 -->
+	<img :src="imgSrc" alt="">
+	```
 
 对于绑定 class 上，有一个进阶使用，叫做对象语法，在 bind 后面传入一个对象的形式来决定是否要添加多个属性，**我们手动写上去的 class 不会被 v-bind 覆盖**
 
@@ -325,8 +304,6 @@ Mustache 语法中，不仅可以写变量，还可以写简单的表达式
   })
 </script>
 ```
-
-
 
 ## 简单排他
 
@@ -371,11 +348,9 @@ Mustache 语法中，不仅可以写变量，还可以写简单的表达式
 </body>
 ```
 
-
-
 ## 样式绑定
 
-**样式的绑定和属性绑定也非常非常相似**，只不过当使用对象语法的时候，需要注意的是，如果这个对象里面的键值对是 ```{key:value}``` 的形式的话，这个 value 会去 Vue 实例对象中找对应的一个叫 value 的变量；而如果我们把这个键值对的 value 使用单引号括起来的时候，就会直接传值进去
+**样式的绑定和属性绑定也非常非常相似**，只不过当使用对象语法的时候，需要注意的是，如果这个对象里面的键值对是 `{key:value}` 的形式的话，这个 value 会去 Vue 实例对象中找对应的一个叫 value 的变量；而如果我们把这个键值对的 value 使用单引号括起来的时候，就会直接传值进去
 
 ```html
 <body>
@@ -401,8 +376,6 @@ Mustache 语法中，不仅可以写变量，还可以写简单的表达式
 
 </body>
 ```
-
-
 
 ## 计算属性
 
@@ -464,107 +437,87 @@ computed: {
 
 一旦 get 中的任意属性值发生改变的话，get 方法会被重新调用
 
-
-
 ## 事件监听
 
-监听用户的各种操作，实现程序和用户之间的交互，在 Vue 中通过 ```v-on``` 指令来实现，语法糖为 ```@```
+监听用户的各种操作，实现程序和用户之间的交互，在 Vue 中通过 `v-on` 指令来实现，语法糖为 `@`
 
 （基本使用的 demo 已经在快速开始中）
 
 监听时有时会希望传参，传参主要就分为两个情况：
 
-1. 不传入 ```$event``` 对象：这种时候就正常该怎么用怎么用，监听事件后面填写的函数后面需要跟有括号，不传参的话就都会显示 undefined
+1. 不传入 `$event` 对象：这种时候就正常该怎么用怎么用，监听事件后面填写的函数后面需要跟有括号，不传参的话就都会显示 undefined
 
-   ```html
-   <button @click="btn_1_click()">按钮 1</button>
-   <button @click="btn_2_click">按钮 2</button>
-   <button @click="btn_3_click(123)">按钮 3</button>
-   ```
+		```html
+		<button @click="btn_1_click()">按钮 1</button>
+		<button @click="btn_2_click">按钮 2</button>
+		<button @click="btn_3_click(123)">按钮 3</button>
+		```
 
-   
+2. 传入 `$event` 对象：如果监听事件后面绑定的函数没有加括号，且该函数需要传参的话，Vue 会默认把 event 对象作为第一个参数传入，后面的都为 undefined；若想手动获取到 event 对象，只需要手动传入 `$event` 即可
 
-2. 传入 ```$event``` 对象：如果监听事件后面绑定的函数没有加括号，且该函数需要传参的话，Vue 会默认把 event 对象作为第一个参数传入，后面的都为 undefined；若想手动获取到 event 对象，只需要手动传入 ```$event``` 即可
+		```html
+		<!-- 这种若函数 btn_4_click 有参数，则默认传入 event 对象 -->
+		<button @click="btn_4_click">按钮 4</button>
+		<!-- 手动传入 event 对象 -->
+		<button @click="btn_5_click($event, 123)">按钮 5</button>
+		```
 
-   ```html
-   <!-- 这种若函数 btn_4_click 有参数，则默认传入 event 对象 -->
-   <button @click="btn_4_click">按钮 4</button>
-   <!-- 手动传入 event 对象 -->
-   <button @click="btn_5_click($event, 123)">按钮 5</button>
-   ```
+`v-on` 还有一些修饰符来实现一些特殊的功能：
 
-   
+1. stop，阻止事件冒泡：
 
-```v-on``` 还有一些修饰符来实现一些特殊的功能：
+想在哪一个节点终止冒泡，就在哪个节点添加 stop 修饰符
 
-1.  stop，阻止事件冒泡：
-
-   想在哪一个节点终止冒泡，就在哪个节点添加 stop 修饰符
-
-   ```html
-   <div id="app">
-     <div @click="div_2_Click()">
-       <div @click.stop="div_1_Click()">
-         <button @click="btnClick()">冒泡</button>
-       </div>
-     </div>
-   </div>
-   ```
-
-   
+```html
+<div id="app">
+  <div @click="div_2_Click()">
+    <div @click.stop="div_1_Click()">
+      <button @click="btnClick()">冒泡</button>
+    </div>
+  </div>
+</div>
+```
 
 2. prevent，阻止默认事件发生：
 
-   比如要阻止表单提交这个默认事件，使用自己定义好的函数来实现提交
+		比如要阻止表单提交这个默认事件，使用自己定义好的函数来实现提交
 
-   ```html
-   <form action="/api">
-     <!-- 若不添加 prevent 修饰，则点击提交后（本地运行）直接 404 -->
-     <input type="submit" value="提交" @click.prevent="submitClick()">
-   </form>
-   ```
-
-   
+		```html
+		<form action="/api">
+		  <!-- 若不添加 prevent 修饰，则点击提交后（本地运行）直接 404 -->
+		  <input type="submit" value="提交" @click.prevent="submitClick()">
+		</form>
+		```
 
 3. {keyCode | keyAlias}，事件从特定键位触发，比如用户按回车的时候
 
-   ```html
-   <input type="text" @keyup.enter="keyUp()">
-   ```
-
-   
+		```html
+		<input type="text" @keyup.enter="keyUp()">
+		```
 
 4. native，监听组件根元素的原生事件（后头再写，现在不会）
 
 5. once，只触发一次，
 
-   ```html
-   <button @click.once="btnClick()"></button>
-   ```
-
-   
-
-
+		```html
+		<button @click.once="btnClick()"></button>
+		```
 
 ## 条件判断
 
-通过条件判断来决定某些内容是否显示，最基本的可以通过 ```v-if``` 指令实现：
+通过条件判断来决定某些内容是否显示，最基本的可以通过 `v-if` 指令实现：
 
 ```html
 <!-- 当 message 的长度大于 10 才会显示 -->
 <h2 v-if="message.length > 10">{{message}}</h2>
 ```
 
-
-
-还可以通过 ```v-else``` 来决定，如果 `v-if` 的条件不满足的时候要显示什么：
+还可以通过 `v-else` 来决定，如果 `v-if` 的条件不满足的时候要显示什么：
 
 ```html
 <h2 v-if="message.length > 10">{{message}}</h2>
 <h2 v-else>Hello Vue!</h2>
 ```
-
-
 
 当遇到更复杂的情况时候，可以再通过 `v-else-if` 来进行多条件判断：
 
@@ -577,13 +530,9 @@ computed: {
 
 不过当遇到这种复杂的判断的时候，可以在计算属性（computed attribute）中先判断出结果，然后直接显示
 
-
-
 `v-show` 也可以实现决定内容的显示还是不显示，但是它和 `v-if` 不同的是，`v-show` 通过修改 display 样式的方式来控制显示还是不显示，而 `v-if` 是在 DOM 节点层次上进行修改。
 
 > 如果需要非常频繁地切换，则使用 `v-show` 较好；如果在运行时条件很少改变，则使用 `v-if` 较好。
-
-
 
 ## 循环
 
@@ -595,18 +544,20 @@ computed: {
 <li v-for="(value, key, index) in object">{{index}}.{{key}}.{{value}}</li>
 ```
 
-
-
-
-
 ## 响应式方法
 
 - push
+
 - pop
+
 - shift（删除第一个）
+
 - unshift
+
 - splice
+
 - sort
+
 - reverse
 
 - ...
@@ -617,55 +568,45 @@ computed: {
 Vue.set(obj, index, value);	
 ```
 
-
-
 # 三个 JS 高阶函数
 
 这里的三个高阶函数实际就是函数式，和 Haskell 非常像
 
 1. filter 函数：
 
-   把一个数组内的每一个元素按照特定的条件进行筛选过滤，最后返回一个新的数组
+		把一个数组内的每一个元素按照特定的条件进行筛选过滤，最后返回一个新的数组
 
-   ```javascript
-   let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-   let newArr = arr.filter(n => n < 5);
-   ```
+		```javascript
+		let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+		let newArr = arr.filter(n => n < 5);
+		```
 
-   return 后面的条件为 true 则保留该元素，反之不会加到新的数组里
-
-   
+		return 后面的条件为 true 则保留该元素，反之不会加到新的数组里
 
 2. map 函数：
 
-   map 此处取映射的含义比较好理解，即传入一个回调函数，并将该函数 map 到每一个元素上
+		map 此处取映射的含义比较好理解，即传入一个回调函数，并将该函数 map 到每一个元素上
 
-   ```javascript
-   let arr = [1, 2, 3, 4];
-   // 对每一个元素进行乘 2 的操作
-   let newArr = arr.map(n => n * 2);
-   ```
-
-   
+		```javascript
+		let arr = [1, 2, 3, 4];
+		// 对每一个元素进行乘 2 的操作
+		let newArr = arr.map(n => n * 2);
+		```
 
 3. reduce 函数：
 
-   reduce 函数取第一个元素和下一个函数，并且将 return 的结果最为下一次回调的第一个元素
+		reduce 函数取第一个元素和下一个函数，并且将 return 的结果最为下一次回调的第一个元素
 
-   ```javascript
-   let arr = [1, 2, 3, 4, 5];
-   let sum = arr.reduce((pre, next) => pre + next， 0)
-   ```
+		```javascript
+		let arr = [1, 2, 3, 4, 5];
+		let sum = arr.reduce((pre, next) => pre + next， 0)
+		```
 
-   上面是求一个数组的和，reduce 函数的第二个参数为第一轮的初始值，这时候第一轮的 next 就会是 arr[0]
-
-
+		上面是求一个数组的和，reduce 函数的第二个参数为第一轮的初始值，这时候第一轮的 next 就会是 arr[0]
 
 # 表单绑定 v-model
 
 Vue 中使用 `v-model` 指令来实现表单元素和数据之间的双向绑定，主要用在注册页面
-
-
 
 ## 快速使用
 
@@ -715,9 +656,7 @@ v-model 是可以通过一个数据绑定和一个监听来实现的：
 </script>
 ```
 
-
-
- ## v-model 和 radio 类型
+## v-model 和 radio 类型
 
 在使用 v-model 做同一个数据的双向绑定的时候，不需要写 name 属性即可实现单选互斥
 
@@ -742,8 +681,6 @@ v-model 是可以通过一个数据绑定和一个监听来实现的：
 
 以上 value 值必须有，且 v-model 绑定的数据必须一致，若 Vue 实例中的 gender 有值，且值正确的话，则可以实现页面打开时候默认选择其中一个选项的效果；如果值没有对一个上 value 属性的话，则什么都不选
 
-
-
 ## v-model 和 checkbox 类型
 
 v-model 结合 checkbox 类型的表单做**单选**，比如在注册页面必须要求同意注册协议：
@@ -765,8 +702,6 @@ v-model 结合 checkbox 类型的表单做**单选**，比如在注册页面必�
   })
 </script>
 ```
-
-
 
 v-model 结合 checkbox 类型的表单做多选，比如选择城市、爱好等等：
 
@@ -795,11 +730,7 @@ v-model 结合 checkbox 类型的表单做多选，比如选择城市、爱好�
 
 这里元素添加的方式是采用 append 的方式追加到 cities 中，先选的在前面，后选的在后面
 
-
-
 简单来说，对应的是一个值的时候，不需要 value 属性，且在 Vue 实例中需要一个 bool 类型数据来做记录；做多选的时候需要在选项上添加 value 属性，在 Vue 实例中需要一个数组类型数据来储存
-
-
 
 做复选框的时候，可以把一些原始数据交给 Vue 实例来管理，然后使用循环的方式把数据展示出来：
 
@@ -820,10 +751,6 @@ v-model 结合 checkbox 类型的表单做多选，比如选择城市、爱好�
   })
 </script>
 ```
-
-
-
-
 
 ## v-model 结合 select 类型
 
@@ -852,67 +779,43 @@ select 也分为单选和多选两种情况
 </script>
 ```
 
-
-
 多选的情况下，只需要在 select 标签中添加 **multiple 属性**，并且使用**数组来储存**即可
-
-
 
 ## 修饰符
 
 1. **lazy 修饰符：**
 
-   在数据双向绑定之后，数据会实时根据变化而变化，通过 lazy 修饰符可以让数据在失去焦点或按下回车后进行数据更新
+		在数据双向绑定之后，数据会实时根据变化而变化，通过 lazy 修饰符可以让数据在失去焦点或按下回车后进行数据更新
 
-   ```html
-   <input type="text" v-model.lazy="message">
-   <h3>{{message}}</h3>
-   ```
-
-   
+		```html
+		<input type="text" v-model.lazy="message">
+		<h3>{{message}}</h3>
+		```
 
 2. **number 修饰符：**
 
-   有时 input 只允许用户输入数字，这时 input 的类型可以写成 number，但是在这时进行双向绑定的时候，用户输入完数字后，数据会变成字符串类型，实际就是变量重定向了。如果，我们希望这个值是数字类型，而非字符串类型的时候，就可以加上 number 修饰符：
+		有时 input 只允许用户输入数字，这时 input 的类型可以写成 number，但是在这时进行双向绑定的时候，用户输入完数字后，数据会变成字符串类型，实际就是变量重定向了。如果，我们希望这个值是数字类型，而非字符串类型的时候，就可以加上 number 修饰符：
 
-   ```html
-   <div id="app">
-     <!--1. lazy 修饰符-->
-     <input type="number" v-model.number="age">
-     <h3>{{message}} -- {{typeof message}}</h3>
-   </div>
-   
-   <script>
-     const app = new Vue({
-       el: '#app',
-       data: {
-         // 这里即使一开始是个字符串，一旦数据发生改变，其会替换成数字类型
-         age: '0'
-       }
-     })
-   </script>
-   ```
+		```html
+		<div id="app">
+		  <!--1. lazy 修饰符-->
+		  <input type="number" v-model.number="age">
+		  <h3>{{message}} -- {{typeof message}}</h3>
+		</div>
 
-   
+		<script>
+		  const app = new Vue({
+		    el: '#app',
+		    data: {
+		      // 这里即使一开始是个字符串，一旦数据发生改变，其会替换成数字类型
+		      age: '0'
+		    }
+		  })
+		</script>
+		```
 
 3. **trim 修饰符：**
 
-   去除用户在两边输入的多余的空格
-
-   
+		去除用户在两边输入的多余的空格
 
 **修饰符可以串联使用**
-
-
-
-
-
-
-
-
-
-
-
-
-
-

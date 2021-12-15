@@ -1,3 +1,13 @@
+---
+creation date: 2021-6-1 0:00
+title: Vue-Axios
+categories:
+- front-end
+tags:
+- front-end
+- vue
+---
+
 Vuex 可以看做一个全局静态对象管理工具，可以在里面存放不同的信息、方法等等，所有的组件都可以直接使用 Vuex 中的 store
 
 并且，Vuex 提供完整的额状态管理模式

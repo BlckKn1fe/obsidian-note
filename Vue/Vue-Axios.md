@@ -1,3 +1,15 @@
+---
+creation date: 2021-6-1 0:00
+last modified: 2021-12-14 23:39
+title: Vue-Axios
+categories:
+  - front-end
+tags:
+  - front-end
+  - vue
+
+---
+
 # axios 请求方式
 
 ```
@@ -11,8 +23,6 @@ axios.put(url[,data[,config])
 axios.patch(url[,data[,config])
 ```
 
-
-
 # 快速开始
 
 安装 axios：
@@ -20,8 +30,6 @@ axios.patch(url[,data[,config])
 ```
 npm install axios --save
 ```
-
-
 
 为做 demo 演示，在 Vue 项目中的 main 入口处使用 axios
 
@@ -35,8 +43,6 @@ axios({
   console.log(res.config);
 })
 ```
-
-
 
 如果请求后面有参数的话，可以添加一个 params 属性：
 
@@ -53,8 +59,6 @@ axios({
 })
 ```
 
-
-
 # 并发请求
 
 当有多个网络请求，并且要求结果全部到达之后在做进一步处理的话，可以使用 all 方法
@@ -68,8 +72,6 @@ axios.all([
 })
 ```
 
-
-
 axios 还提供了 spread 方法可以把结果直接解构出来
 
 ```javascript
@@ -82,8 +84,6 @@ axios.all([
 }))
 ```
 
-
-
 # axios 配置
 
 有很多公共的配置可以通过设置 axios 的全局配置，然后让所有的其他请求都使用到全局配置，可以通过设置 axios 的 defaults 属性：
@@ -94,13 +94,9 @@ axios.defaults.baseURL = 'XXXXX'
 axios.defaults.timeout = 60
 ```
 
-
-
 更多配置参考官方文档：
 
-> https://axios-http.com/zh/docs/req_config
-
-
+> <https://axios-http.com/zh/docs/req_config>
 
 # axios 实例
 
@@ -117,8 +113,6 @@ const instanceB = axios.create({
   timeout: 2000
 })
 ```
-
-
 
 # axios 模块化封装
 
@@ -139,6 +133,4 @@ export function request(config) {
 
 ```
 
-
 在其他组件想要进行网络请求的时候，只需要引用该文件，调用 request 方法就可以。如果以后出现其他的第三方框架，只需要改动 request.js 文件即可，将异步操作包裹进 Promise 中并 return 出去，不影响其他地方使用
-

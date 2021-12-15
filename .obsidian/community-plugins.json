@@ -1,5 +1,8 @@
 [
   "obsidian-git",
   "templater-obsidian",
-  "oz-image-plugin"
+  "calendar",
+  "obsidian-outliner",
+  "obsidian-tasks-plugin",
+  "markdown-prettifier"
 ]

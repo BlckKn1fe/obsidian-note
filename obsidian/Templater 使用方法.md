@@ -24,4 +24,3 @@ tags:
 一共 7 个模块，具体使用方法参考官方文档：
 > https://silentvoid13.github.io/Templater/docs/internal-variables-functions
 
-
