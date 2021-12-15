@@ -7,8 +7,11 @@
         "id": "b36b4db8ee533931",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "未命名.md",
+            "mode": "source"
+          }
         }
       }
     ],
@@ -54,6 +57,7 @@
         "state": {
           "type": "backlink",
           "state": {
+            "file": "未命名.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -68,5 +72,7 @@
     "currentTab": 0
   },
   "active": "b36b4db8ee533931",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "未命名.md"
+  ]
 }
