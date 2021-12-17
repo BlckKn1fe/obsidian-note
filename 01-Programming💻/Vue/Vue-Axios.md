@@ -1,16 +1,15 @@
 ---
-creation date: 2021-6-1 0:00
-last modified: 2021-12-14 23:39
+creation date: 2021-07-05 03:05:14
+last modified: 2021-12-16 06:02:04
 title: Vue-Axios
 categories:
-  - front-end
+- front-end
 tags:
-  - front-end
-  - vue
-
+- vue
+- front-end
 ---
 
-# axios 请求方式
+# Axios 请求方式
 
 ```
 axios(config)
@@ -84,7 +83,7 @@ axios.all([
 }))
 ```
 
-# axios 配置
+# Axios 配置
 
 有很多公共的配置可以通过设置 axios 的全局配置，然后让所有的其他请求都使用到全局配置，可以通过设置 axios 的 defaults 属性：
 
@@ -96,9 +95,9 @@ axios.defaults.timeout = 60
 
 更多配置参考官方文档：
 
-> <https://axios-http.com/zh/docs/req_config>
+> https://axios-http.com/zh/docs/req_config
 
-# axios 实例
+# Axios 实例
 
 如果我们用上面的方式做全局配置，所有的 axios 都会使用同一套配置。有时候，由于后端分布式设计，需要我们去不同的服务器内请求数据，就导致了 URL 不一样，这种时候就可以创建多几个 axios 实例，然后给他们彼此独立的配置
 
@@ -114,7 +113,7 @@ const instanceB = axios.create({
 })
 ```
 
-# axios 模块化封装
+# Axios 模块化封装
 
 如果我们在每一个 Vue 的组件内都导入了 axios 并使用它，那么项目对 axios 的依赖就非常强，所以比较好的一个办法是在**外部封装好一系列请求方法，在组件的角度来看，每个组件只需要调用对应的方法就可以获取到想要的数据**，不需要考虑该方法是如何实现的
 
@@ -134,3 +133,4 @@ export function request(config) {
 ```
 
 在其他组件想要进行网络请求的时候，只需要引用该文件，调用 request 方法就可以。如果以后出现其他的第三方框架，只需要改动 request.js 文件即可，将异步操作包裹进 Promise 中并 return 出去，不影响其他地方使用
+

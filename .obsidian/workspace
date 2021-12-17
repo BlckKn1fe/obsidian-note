@@ -7,12 +7,8 @@
         "id": "723b1c0529fece82",
         "type": "leaf",
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "未命名.md",
-            "mode": "preview",
-            "source": false
-          }
+          "type": "empty",
+          "state": {}
         }
       }
     ],
@@ -40,7 +36,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#task",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -69,7 +65,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "未命名.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -95,7 +90,7 @@
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true
+                "useHierarchy": false
               }
             }
           },
@@ -104,9 +99,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "未命名.md"
-              }
+              "state": {}
             }
           },
           {
@@ -127,14 +120,14 @@
   "active": "723b1c0529fece82",
   "lastOpenFiles": [
     "未命名.md",
-    "Tasks 使用方法.md",
-    "Vue/Vue快速入门.md",
-    "Vue/Vue-Axios.md",
-    "days/2021-12-14.md",
-    "days/day_template.md",
-    "obsidian/Templater 使用方法.md",
-    "Vue/Vue组件化.md",
-    "Template.md",
-    "days/Test.md"
+    "01-Programming💻/Vue/Vue-Axios.md",
+    "01-Programming💻/Vue/Vue快速入门.md",
+    "01-Programming💻/Vue/Vue组件化.md",
+    "01-Programming💻/Vue/VueCLI.md",
+    "01-Programming💻/Vue/VueRouter.md",
+    "01-Programming💻/Vue/Vuex.md",
+    "01-Programming💻/Spring/SpringMVC.md",
+    "01-Programming💻/Spring/Spring.md",
+    "01-Programming💻/Spring/00-Spring全家桶.md"
   ]
 }
