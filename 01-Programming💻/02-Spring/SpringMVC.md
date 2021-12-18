@@ -1,4 +1,14 @@
-
+---
+creation date: 2021-11-27 12:20:48
+last modified: 2021-12-18 00:20:50
+title: SpringMVC
+categories:
+- back-end
+- spring
+tags:
+- java
+- spring-mvc
+---
 
 Spring MVC 是基于 Spring 的，是其中的一个模块，其底层依赖 Servlet 实现。Spring MVC 的核心类是 DispatcherServlet，它的父类是 HttpServlet，也叫做前端控制器。
 

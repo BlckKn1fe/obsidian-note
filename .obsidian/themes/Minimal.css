@@ -160,17 +160,17 @@ Disabled features */
   --font-ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 
   /* Sizes, weights, padding */
-  --font-normal:24px;
-  --font-small:20px;
-  --font-smaller:16px;
-  --font-smallest:14px;
+  --font-normal:26px;
+  --font-small:22px;
+  --font-smaller:18px;
+  --font-smallest:16px;
 
   --font-title:1.1em;
 
-  --h1:1.125em;
-  --h2:1.05em;
-  --h3:1em;
-  --h4:0.90em;
+  --h1:1.75em;
+  --h2:1.5em;
+  --h3:1.25em;
+  --h4:1em;
   --h5:0.85em;
   --h6:0.85em;
 

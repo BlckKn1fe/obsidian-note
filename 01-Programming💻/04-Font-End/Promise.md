@@ -1,3 +1,14 @@
+---
+creation date: 2021-12-14 16:23
+last modified: 2021-12-18 00:15:43
+title: Promise
+categories:
+- front-end
+tags:
+- es6
+- javascript
+---
+
 Promise 为异步编程的一种解决方案，在网络请求中很常见，其可以很明确的逻辑处理请求的数据
 
 
