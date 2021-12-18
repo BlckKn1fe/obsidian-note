@@ -1,6 +1,6 @@
 ---
 creation date: 2021-10-09 23:55:20
-last modified: 2021-12-18 00:19:46
+last modified: 2021-12-18 00:20:24
 title: Spring
 categories:
 - back-end
@@ -24,8 +24,6 @@ tags:
 </dependencies>
 ```
 
-
-
 创建对应的 Dao 接口和对应的实现
 
 ```java
@@ -45,8 +43,6 @@ public class UserDaoImpl implements UserDao {
 }
 ```
 
-
-
 创建 Spring 的配置文件（ID为Spring获取对象所需的标识符）
 
 ```xml
@@ -59,8 +55,6 @@ public class UserDaoImpl implements UserDao {
     
 </beans>
 ```
-
-
 
 最后在 Main 里通过框架来创建想要的对象（通过 getBean("id")的方式获取对象）
 
@@ -77,10 +71,6 @@ public class UserDaoDemo {
 
 }
 ```
-
-
-
-
 
 # IOC-Bean管理
 
@@ -282,8 +272,6 @@ http://www.springframework.org/schema/util
 http://www.springframework.org/schema/util/spring-util.xsd
 ```
 
-
-
 然后创建提取集合出来：
 
 ```xml
@@ -293,8 +281,6 @@ http://www.springframework.org/schema/util/spring-util.xsd
     <value>CCC</value>
 </util:list>
 ```
-
-
 
 ## 后置处理器
 
@@ -317,8 +303,6 @@ public class MyBeanPost implements BeanPostProcessor {
 }
 ```
 
-
-
 然后在配置文件中创建这个 Bean 对象即可
 
 
@@ -333,8 +317,6 @@ public class MyBeanPost implements BeanPostProcessor {
 <!-- applicationContext.xml 文件中 -->
 <import resource="applicationContext-user.xml"/>
 ```
-
-
 
 # ApplicationContext 
 
@@ -385,8 +367,6 @@ public class MyBeanPost implements BeanPostProcessor {
 <context:component-scan base-package="com.XXX" />
 ```
 
-
-
 还可以添加子标签来设置 include 或 exclude
 
 ```xml
@@ -394,10 +374,6 @@ public class MyBeanPost implements BeanPostProcessor {
 	<context:include type="annotation" expression="全类名" />
 </context:component-scan>
 ```
-
-
-
-
 
 ## Spring 原始注解注入
 
@@ -457,10 +433,6 @@ public class SpringConfig {
 }
 ```
 
-
-
-
-
 # AOP
 
 
@@ -515,18 +487,12 @@ Spring 框架一般是基于 AspectJ 实现 AOP 操作； AspectJ 不是 Spring 
        http://www.springframework.org/schema/aop/spring-aop.xsd">
 ```
 
-
-
 ```xml
 <!--开启注解扫描-->
 <context:component-scan base-package="aopanno" />
 <!--开启aspectJ生成代理对象-->
 <aop:aspectj-autoproxy />
 ```
-
-
-
-
 
 ## 注解操作
 
@@ -569,8 +535,6 @@ public class UserProxy {
 
 ```
 
-
-
 五种通知无异常情况下执行顺序如下：
 
 - Around Before
@@ -608,8 +572,6 @@ public void before() {
 }
 ```
 
-
-
 ## 注解操作：优先级
 
 当有多个增强类对目标类进行增强的话，可以设置优先级，来决定谁先执行谁后执行，通过 @Order 注解来实现
@@ -621,8 +583,6 @@ public void before() {
 public class PersonProxy {}
 ```
 
-
-
 ## 注解操作：完全注解开发（补充）
 
 在 SpringConfig 这个 class 中，添加 @EnableAspectJAutoProxy 这一条注解，并且将 proxyTargetClass 设置为 true
@@ -633,8 +593,6 @@ public class PersonProxy {}
 @EnablkeAspectJAutoProxy
 public class SpringConfig{}
 ```
-
-
 
 # SpringTemplate
 
@@ -672,8 +630,6 @@ jdbc.url=jdbc:mysql://localhost:3306/test
 jdbc.username=root
 jdbc.password=123456
 ```
-
-
 
 ## Spring配置数据源
 
@@ -721,8 +677,6 @@ public class BookDaoImpl implements BookDao {
 }
 ```
 
-
-
 其中 update 方法的第一个参数是 sql 语句，第二个参数为一个可变参数，也可以是一个参数数组，以此替换到sql 语句的 "?" 
 
 
@@ -745,8 +699,6 @@ public int selectCount() {
 }
 ```
 
-
-
 ## 查询操作（对象示例）
 
 和查值基本一样，但是需要多传入一个 Mapper 参数，以此让程度通过 Bean 的 set 方法来生成对象：
@@ -761,8 +713,6 @@ public Book findByID(String id) {
 
 Mapper 调用 set 方法的时候，是去找 Bean 方法名中能对应上的，而不是去找 filed 的名字
 
-
-
 ## 查询操作（集合示例）
 
 比如查询图书列表、分页，此时会从数据库拿到一个集合，同样也是通过 queryForObject 来获取：
@@ -774,8 +724,6 @@ public List<Book> findAll() {
     return books;
 }
 ```
-
-
 
 ## 批量操作（添加示例）
 
@@ -814,8 +762,6 @@ public void batchAddTest() {
 }
 
 ```
-
-
 
 ## 批量操作（修改/删除）略
 
@@ -883,8 +829,6 @@ Spring 框架有 7 种传播行为：
 @Transactional(propagation = Propagation.REQUIRED)
 ```
 
-
-
 ## 注解参数（隔离级别）
 
 隔离级别主要是用来解决并发的时候出现的一些问题：脏读、不可重复读和幻读
@@ -913,8 +857,6 @@ Spring 框架有 7 种传播行为：
 ```java
 @Transactional(isolation = Isolation.REPEATABLE_READ)
 ```
-
-
 
 ## 注解参数（其他参数）
 
@@ -947,8 +889,6 @@ Spring 框架有 7 种传播行为：
 </dependency>
 ```
 
-
-
 然后创建配置文件 `log4j2.xml`
 
 > 具体其他配置方式参考 https://logging.apache.org/log4j/2.x/manual/configuration.html
@@ -969,8 +909,6 @@ Spring 框架有 7 种传播行为：
 </dependency>
 ```
 
-
-
 如果是整合 JUnit 4 的话，在单元测试类上面添加两个注解：
 
 ```java
@@ -987,8 +925,6 @@ public class JTest {
     private UserService userService
 }
 ```
-
-
 
 如果是整合 JUnit 5 的话，先引入 JUnit 5 的包，并且给单元测试类添加 @SpringJUnitConfig 注解：
 
@@ -1014,8 +950,6 @@ public class JTest {}
 ## Reactor 实现响应式
 
 Reactor 满足 Reactive 规范，其有两个核心类，Mono 和 Flux，这两个类都实现了 Publisher 接口。Flux 作为发布者对象，可以返回 N 个元素；而 Mono 只能返回 0 或者 1 个对象。他们两个都是数据流（Stream）的发布者，他们两个可以发布三种数据信号：元素值，错误信号，和完成信号，后两个都代表终止信号，终止信号用于告诉 Subscriber 数据流技术了，其中错误信号终止数据流并且把错误信息传递给 Subscriber
-
-
 
 ## WebFlux 注解式
 
@@ -1046,12 +980,4 @@ public class UserController {
     }
 }
 ```
-
-
-
-
-
-
-
-
 

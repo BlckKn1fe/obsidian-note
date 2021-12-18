@@ -7,8 +7,12 @@
         "id": "852ef83abdec3448",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "01-Programming💻/02-Spring/Spring.md",
+            "mode": "source",
+            "source": false
+          }
         }
       }
     ],
@@ -79,12 +83,13 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "01-Programming💻/02-Spring/Spring.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
-                "backlinkCollapsed": false,
+                "backlinkCollapsed": true,
                 "unlinkedCollapsed": false
               }
             }
@@ -113,7 +118,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "01-Programming💻/02-Spring/Spring.md"
+              }
             }
           }
         ],
@@ -125,15 +132,15 @@
   },
   "active": "852ef83abdec3448",
   "lastOpenFiles": [
+    "01-Programming💻/02-Spring/Spring.md",
+    "01-Programming💻/02-Spring/00-Spring-Dashboad.md",
+    "01-Programming💻/01-Java/00-Java-Dashboad.md",
     "02-LeetCode✨/未命名.md",
     "template/front-matter.md",
     "template/leetcode.md",
     "03-obsidian🔸/Templater 使用方法.md",
-    "01-Programming💻/02-Spring/Spring.md",
     "02-LeetCode/未命名.md",
     "00-Days📅/2021-12-18.md",
-    "00-Days📅/2021-12-17.md",
-    "00-Days📅/day_template.md",
-    "01-Programming💻/Programming看板导航.md"
+    "00-Days📅/2021-12-17.md"
   ]
 }

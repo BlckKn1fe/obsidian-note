@@ -14,6 +14,8 @@ kanban-plugin: basic
 
 ## Finished
 
+- [ ] [[Spring]]
+- [ ] [[SpringMVC]]
 
 
 
