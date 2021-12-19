@@ -67,7 +67,7 @@
       "Removes leading and trailing blank lines in the YAML front matter.": true
     },
     "Consecutive blank lines": {
-      "There should be at most one consecutive blank line.": false
+      "There should be at most one consecutive blank line.": true
     },
     "Convert Spaces to Tabs": {
       "Converts leading spaces to tabs.": false,

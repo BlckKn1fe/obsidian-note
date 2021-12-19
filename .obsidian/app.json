@@ -3,5 +3,6 @@
   "showLineNumber": true,
   "legacyEditor": false,
   "livePreview": true,
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "readableLineLength": false
 }
