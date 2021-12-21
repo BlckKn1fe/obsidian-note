@@ -1,6 +1,6 @@
 ---
 creation date: 2021-11-27 12:20:48
-last modified: 2021-12-19 04:24:26
+last modified: 2021-12-21 04:04:29
 title: SpringMVC
 categories:
 - back-end
@@ -289,3 +289,129 @@ public String testParam(
 里面还有个 `required` 属性可以设置，如果设置为 false 的时候，没有传过来的话就是 null，如果设置 true 但是没传就报 400；
 
 还有 `defaultValue` 属性可以设置，如果请求中根本没有某个参数，或者有这个参数但是没有值，那么这个参数就会被设置为提前设定好的默认值
+
+## 其他注解获取请求相关值
+
+1. `@RequestHeader` 注解通过设置 value 可以获得请求头中特定的某条属性的值，这个注解也可以设置 `required` 属性和 `defaultValue` 属性
+2. `@CookieValue` 可以获取到 `JSESSIONID` ，用法没什么区别
+
+## 通过 POJO 封装请求参数
+
+使用方法也很简单，就是让请求参数的名字与提前设计好的 Bean 的 field name 保持一致，然后在形参的地方直接用这个 Bean 来封装就可以了，大概写法如下：
+
+```java
+@RequestMapping("/testPOJO")  
+public String testPOJO(User user) {  
+ System.out.println(user);  
+ return "success";  
+}
+```
+
+前端会提交一个表单，表单里的数据有 `username`, `password`, `sex`, `age`, 和 `email`；User 对象里也有这五个 field
+
+## 设置 CharacterEncodingFilter
+
+在 web.xml 文件中添加：
+
+```xml
+<filter>  
+ <filter-name>CharacterEncodingFilter</filter-name>  
+ <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+ <init-param>  
+ <param-name>encoding</param-name>  
+ <param-value>UTF-8</param-value>  
+ </init-param>  
+</filter>
+```
+
+只要设置了 encoding 这个属性，它会强制要求 request 的参数用 UTF-8 编码，如果要求 response 也用的话，在多写一个 `init-param` 给那个 forceResponseEncoding 一个 true 就可以了（点进源码看）
+
+# 域对象共享数据
+
+有三（四）种不同作用范围的域对象，还有一个 JSP 不用了：
+1. request 域对象：作用范围为一次请求，转发不会使 request 域对象失效
+2. session 域对象：作用范围为一次会话，只要浏览器窗口打开没有关闭，则 session 一直一直存在，session 默认有效时长为 30 分钟
+3. application 域对象：作用范围为整个 WEB 应用，只要服务器不关闭，这域对象一直有效
+
+## 通过 ServletAPI 向域对象共享数据
+
+使用方法为在控制器方法中获取到本次的 request，并且通过 set, get, remove 等方法对共享的数据进行操作（不推荐使用 ServletAPI）
+
+```java
+@RequestMapping("/testRequestByServletAPI")  
+public String testRequestByServletAPI(HttpServletRequest req) {  
+ req.setAttribute("testRequestScope", "hello ");  
+  
+ return "success";  
+}
+```
+
+然后，通过 thymeleaf 获取到 request 中共享的数据：
+
+```html
+<!--/*@thymesVar id="testRequestScope" type="java.lang.String"*/-->
+<p th:text="${testRequestScope}"></p><br>
+```
+
+## 通过 ModelAndView 实现
+
+这个方式就是先创建 `ModelAndView` 对象，然后设置好 Model 数据，然后设置好视图名称，将其作为结果返回
+
+```java
+@RequestMapping("/testModelAndView")  
+public ModelAndView testModelAndView() {  
+ ModelAndView mav = new ModelAndView();  
+ mav.addObject("testModelAndView", "Hello Model and View");  
+ mav.setViewName("success");  
+ return mav;  
+}
+```
+
+在视图中获取数据的方式和之前一样
+
+```html
+<!--/*@thymesVar id="testModelAndView" type="java.lang.String"*/-->
+<p th:text="${testModelAndView}"></p><br>
+```
+
+## 通过 Model 实现
+
+其实这个最终也是要依靠 `ModelAndView` 来实现，先把 Model 创建出来，然后把需要的数据封装好，最后再 return 一个视图名称出去
+
+```java
+@RequestMapping("/testModel")  
+public String testModel(Model model) {  
+ model.addAttribute("testModel", "Hello Model");  
+ return "success";  
+}
+```
+
+在视图中获取（略）
+
+## 通过 Map 实现
+
+基本和 Model 一样，形参变成 Map，实现过程大同小异
+
+```java
+@RequestMapping("/testMap")  
+public String testMap(Map<String, Object> map) {  
+ map.put("testMap", "Hello Map");  
+ return "success";  
+}
+```
+
+## 通过 ModelMap 实现（略）
+## 对以上三种方法的总结
+
+实际上，这三个方法最后使用的实例对象都是同一个对象，并且这个对象实现了 Model 接口、实现了 Map 接口、同时也是 ModelMap 的子类
+
+实际运行的示例的对象是：BindingAwareModelMap，这东西是继承的 ExtendedModelMap，而 ExtendedModelMap 在继承 ModelMap 的同时，还实现了 Model 接口
+
+```java
+public interface Model{}
+public class ModelMap extends LinkedHashMap<String, Object> {}
+public class ExtendedModelMap extends ModelMap implements Model {}
+public class BindingAwareModelMap extends ExtendedModelMap {}
+```
+
+推荐使用 ModelAndView，因为后面这三个方法，最后都会封装进 ModelAndView 中，如果想研究源码的话，就去 DispatcherServlet 中去找
