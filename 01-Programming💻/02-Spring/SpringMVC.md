@@ -1,6 +1,6 @@
 ---
 creation date: 2021-11-27 12:20:48
-last modified: 2021-12-21 04:04:29
+last modified: 2021-12-23 04:36:54
 title: SpringMVC
 categories:
 - back-end
@@ -415,3 +415,72 @@ public class BindingAwareModelMap extends ExtendedModelMap {}
 ```
 
 推荐使用 ModelAndView，因为后面这三个方法，最后都会封装进 ModelAndView 中，如果想研究源码的话，就去 DispatcherServlet 中去找
+
+## 向 session 域对象共享数据
+
+推荐使用原生 ServletAPI 来实现，在控制器方法上给一个 `HttpSession` 对象作为形参，来获取到 session 对象，并且设置共享数据：
+
+```java
+@RequestMapping("/testSession")
+public String testSession(HttpSession session) {
+	session.setAttribute("testSession", "Hello Session");
+	return "success";
+}
+```
+
+在视图中获取这个数据，只需要通过 `session.key` 的方式就可以获取到
+
+## 向 application 域对象共享数据
+
+这个也是通过 ServletAPI 先获取到 application 域对象，通过 `HttpSession` 先获取 session，然后在通过它的 `getServletContext()` 获取到：
+
+```java
+@RequestMapping("/testApplication")  
+public String testApplication(HttpSession session) {  
+ ServletContext application = session.getServletContext();  
+ application.setAttribute("testApplication", "Hello Application");  
+ return "success";  
+}
+```
+
+# SpringMVC 视图
+
+SpringMVC中的视图是View接口，视图的作用渲染数据，将模型 Model 中的数据展示给用户
+
+SpringMVC视图的种类很多，默认有**转发视图**和**重定向视图**
+
+当工程引入jstl的依赖，转发视图会自动转换为JstlView；
+
+若使用的视图技术为Thymeleaf，在 SpringMVC 的配置文件中配置了 Thymeleaf 的视图解析器，由此视图解析器解析之后所得到的是 ThymeleafView
+
+如果视图名称没有任何前缀和后缀的话，那么 SpringMVC 就会根据配置文件中配置的视图解析器去创造对应的视图
+
+## 转发视图
+
+（用的比较少）
+
+SpringMVC 中默认的转发视图是 InternalResourceView，当控制器方法中所设置的视图名称以 `forward:` 为前缀的时候，就会创建 InternalResourceView 视图，此时的视图名称，不会被 SpringMVC 配置文件中所配置文件中所配置的视图解析器解析，而是会先去掉 forward 前缀，然后剩余的部分以转发的形式实现跳转
+
+```java
+@RequestMapping("testForward")
+public String testForward() {
+	return "forward:/testXXX";
+}
+```
+
+## 重定向视图
+
+SpringMVC中默认的重定向视图是RedirectView，当控制器方法中所设置的视图名称以"redirect:"为前缀时，创建RedirectView视图，此时的视图名称不会被SpringMVC配置文件中所配置的视图解析器解析
+
+```java
+```java
+@RequestMapping("testRedirect")
+public String testRedirect() {
+	return "redirect:/testXXX";
+}
+```
+
+# RESTFul
+
+RESTFul 是一种风格，全程为 Representational State Transfer，表示层资源状态转移
+
