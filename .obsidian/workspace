@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "852ef83abdec3448",
+        "id": "5aadc4885f4f5861",
         "type": "leaf",
         "state": {
           "type": "markdown",
@@ -130,17 +130,17 @@
     "direction": "horizontal",
     "width": 269
   },
-  "active": "852ef83abdec3448",
+  "active": "5aadc4885f4f5861",
   "lastOpenFiles": [
     "01-Programming💻/02-Spring/SpringMVC.md",
+    "Pasted image 20211226050927.png",
+    "Pasted image 20211226050924.png",
     "00-Days📅/2021-12-19.md",
     "03-obsidian🔸/Templater 使用方法.md",
     "00-Days📅/2021-12-18.md",
     "01-Programming💻/02-Spring/Spring.md",
     "01-Programming💻/02-Spring/00-Spring-Dashboad.md",
     "01-Programming💻/01-Java/00-Java-Dashboad.md",
-    "02-LeetCode✨/未命名.md",
-    "template/front-matter.md",
-    "template/leetcode.md"
+    "02-LeetCode✨/未命名.md"
   ]
 }

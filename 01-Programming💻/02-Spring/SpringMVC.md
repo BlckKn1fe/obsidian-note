@@ -1,6 +1,6 @@
 ---
 creation date: 2021-11-27 12:20:48
-last modified: 2021-12-23 04:36:54
+last modified: 2021-12-27 07:24:42
 title: SpringMVC
 categories:
 - back-end
@@ -214,7 +214,7 @@ ant 风格其实也就是模糊匹配，可以在 @RequestMapping 注解的 valu
 /deleteUser?id=1
 ```
 
-rest 方式就是这样的：
+REST 方式就是这样的：
 
 ```
 /deleteUser/1
@@ -482,5 +482,272 @@ public String testRedirect() {
 
 # RESTFul
 
-RESTFul 是一种风格，全程为 Representational State Transfer，表示层资源状态转移
+RESTFul 是一种风格，全程为 Representational State Transfer，用一图概括了
+
+![](https://images-1259064069.cos.ap-guangzhou.myqcloud.com/images/ZCSCNZ{I0`XB%MBW81YANTC.png)
+
+## RESTFul 的实现
+具体说，就是 HTTP 协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。
+
+它们分别对应四种基本操作：GET 用来获取资源，POST 用来新建资源，PUT 用来更新资源，DELETE 用来删除资源。
+
+**REST 风格提倡 URL 地址使用统一的风格设计**，从前到后各个单词使用斜杠分开，不使用问号键值对方式携带请求参数，而是将要发送给服务器的数据作为 URL 地址的一部分，以保证整体风格的一致性。
+
+| 操作     | 传统方式         | REST 风格                  |
+| -------- | ---------------- | -------------------------- |
+| 查询操作 | getUserById?id=1 | user/1 --> GET 请求方式    |
+| 保存操作 | saveUser         | user --> POST 请求方式     |
+| 删除操作 | deleteUser?id=1  | user/1 --> DELETE 请求方式 |
+| 更新操作 | updateUser       | user --> PUT 请求方式      |
+
+然后在对应的控制器方法的 @RequestMapping 注解中，配置对应需要的参数；比如 `/user/{id}` 这个请求路径，设定死 GET 方式就是对应查询操作，DELETE 就是删除操作，具体例子就不写了
+
+## 处理 PUT 和 DELETE 请求
+
+想要处理 PUT 和 DELETE 以及更多的请求方式，需要通过配置拦截器来实现，要去 web.xml 文件中注册一个叫 `HiddenHttpMethodFilter` ，大致配置如下：
+
+```xml
+<filter>  
+ <filter-name>HiddenHttpMethodFilter</filter-name>  
+ <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>  
+</filter>  
+<filter-mapping>  
+ <filter-name>HiddenHttpMethodFilter</filter-name>  
+ <url-pattern>/*</url-pattern>  
+</filter-mapping>
+```
+
+这个拦截器主要就是过滤出那些是 PUT 和 DELETE 和 PATCH 这样的请求，它会先判断请求首先是不是一个 POST 包装的，如果是的话记下来会检查一个叫 `_method` 的一个属性，如果这个属性是 PUT、DELETE、或 PATCH 的其中一个，它会 new 一个 `HttpMethodRequestWrapper` 来代替本次请求
+![](https://images-1259064069.cos.ap-guangzhou.myqcloud.com/images/20211226050949.png)
+
+## 模拟 PUT 和 DELETE 请求
+
+在表单中，使用 type 为 hidden 的 input 来给一个叫 `_method` 的属性复制，值为请求方式的大写字符串：
+
+```html
+<!-- 用表单的形式 -->
+<form th:action="@{/user}" method="post">  
+ <input type="hidden" name="_method" value="PUT">
+ 用户名: <input type="text" name="username">  
+ 密码: <input type="password" name="password">  
+ <input type="submit" value="修改">  
+</form>
+```
+
+## 过滤器设置顺序
+
+需要把编码过滤器写在请求过滤器的前面，因为在请求过滤器中，它有获取 `_method` 属性的操作，就算后面设置本次请求的编码也不生效，所以需要先让编码过滤器在最开始先设定好编码格式
+
+`CharacterEncodingFilter` 设置在 `HiddenHttpMethodFilter` 的前面！
+
+# RESTFul 案例
+
+## 配置环境
+
+1. pom 文件配置 JDK 和打包形式
+    ```xml
+	<properties>  
+	    <maven.compiler.source>11</maven.compiler.source>  
+	    <maven.compiler.target>11</maven.compiler.target>  
+	</properties>  
+	
+	<packaging>war</packaging>
+	
+	```
+	
+	
+	
+2. 添加依赖
+
+    ```xml
+    <dependencies>
+        <!-- SpringMVC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.3.1</version>
+        </dependency>
+        <!-- 日志 -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <!-- ServletAPI -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Spring5和Thymeleaf整合包 -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring5</artifactId>
+            <version>3.0.12.RELEASE</version>
+        </dependency>
+    
+    </dependencies>
+    ```
+
+    
+
+3. 通过 Project Structure 添加 Web 模块
+
+4. 配置 web.xml 文件
+
+    ```xml
+    <!-- Web.xml -->
+    <!--Config Character Encoding Filter-->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceResponseEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!--Config Hidden Http Method Filter-->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!--Config Dispatcher Servlet-->
+    <servlet>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:SpringMVC.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    ```
+
+    
+
+5. 创建 SpringMVC.xml 文件进行配置
+
+     ```xml
+     <!-- Config Annotation Scan -->
+     <context:component-scan base-package="com.demo" />
+     
+     <!-- Config Thymeleaf View Resolver -->
+     <bean id="viewResolver" class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+         <!-- Config Priority -->
+         <property name="order" value="1"/>
+         <property name="characterEncoding" value="UTF-8"/>
+         <property name="templateEngine">
+             <bean class="org.thymeleaf.spring5.SpringTemplateEngine">
+                 <property name="templateResolver">
+                     <bean class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+                         <!-- Config View Prefix -->
+                         <property name="prefix" value="/WEB-INF/templates/"/>
+                         <!-- Config View Suffix -->
+                         <property name="suffix" value=".html"/>
+                         <property name="templateMode" value="HTML5"/>
+                         <property name="characterEncoding" value="UTF-8"/>
+                     </bean>
+                 </property>
+             </bean>
+         </property>
+     </bean>
+     ```
+
+6. 创建需要的 Bean 对象
+
+    ```java
+    package com.demo.bean;
+    
+    public class User {
+    
+        private Integer id;
+        private String lastName;
+    
+        private String email;
+        //1 male, 0 female
+        private Integer gender;
+    
+        public Integer getId() {
+            return id;
+        }
+    
+        public void setId(Integer id) {
+            this.id = id;
+        }
+    
+        public String getLastName() {
+            return lastName;
+        }
+    
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+        }
+    
+        public String getEmail() {
+            return email;
+        }
+    
+        public void setEmail(String email) {
+            this.email = email;
+        }
+    
+        public Integer getGender() {
+            return gender;
+        }
+    
+        public void setGender(Integer gender) {
+            this.gender = gender;
+        }
+    
+        public User(Integer id, String lastName, String email, Integer gender) {
+            super();
+            this.id = id;
+            this.lastName = lastName;
+            this.email = email;
+            this.gender = gender;
+        }
+    
+        public User() {
+        }
+    }
+    ```
+
+    
+
+7. 配置 UserController
+
+    ```java
+    @Controller()
+    public class UserController {
+    
+        private UserDao userDao;
+    
+        @Autowired
+        @Qualifier("userDao")
+        public void setUserDao(UserDao userDao) {
+            this.userDao = userDao;
+        }
+    }
+    ```
+
+## 实现
 
