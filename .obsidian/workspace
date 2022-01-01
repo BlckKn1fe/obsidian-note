@@ -9,8 +9,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "01-Programming💻/02-Spring/SpringMVC.md",
-            "mode": "source",
+            "file": "04-life/00-sport/预防腱鞘炎.md",
+            "mode": "preview",
             "source": false
           }
         }
@@ -41,7 +41,7 @@
               "type": "search",
               "state": {
                 "query": "",
-                "matchingCase": false,
+                "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
@@ -83,7 +83,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01-Programming💻/02-Spring/SpringMVC.md",
+                "file": "04-life/00-sport/预防腱鞘炎.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01-Programming💻/02-Spring/SpringMVC.md"
+                "file": "04-life/00-sport/预防腱鞘炎.md"
               }
             }
           },
@@ -132,15 +132,15 @@
   },
   "active": "5aadc4885f4f5861",
   "lastOpenFiles": [
-    "01-Programming💻/02-Spring/SpringMVC.md",
+    "04-life/00-sport/预防腱鞘炎.md",
+    "Pasted image 20211230094415.png",
     "01-Programming💻/06-通用/Git.md",
+    "01-Programming💻/02-Spring/SpringMVC.md",
     "01-Programming💻/05-Dart/Dart for Java Programmer.md",
     "01-Programming💻/05-Dart/00-Dart-Dashboad.md",
     "01-Programming💻/Programming看板导航.md",
     "01-Programming💻/01-Java/00-Java-Dashboad.md",
     "Pasted image 20211226050927.png",
-    "Pasted image 20211226050924.png",
-    "00-Days📅/2021-12-19.md",
-    "03-obsidian🔸/Templater 使用方法.md"
+    "Pasted image 20211226050924.png"
   ]
 }
