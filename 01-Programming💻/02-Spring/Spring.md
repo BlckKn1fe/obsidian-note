@@ -1,6 +1,6 @@
 ---
 creation date: 2021-10-09 23:55:20
-last modified: 2021-12-18 00:20:24
+last modified: 2021-12-18 00:52:07
 title: Spring
 categories:
 - back-end
@@ -74,11 +74,7 @@ public class UserDaoDemo {
 
 # IOC-Bean管理
 
-
-
 ![](https://images-1259064069.cos.ap-guangzhou.myqcloud.com/images/20211011031650.png)
-
-
 
 ## Bean 标签基本配置
 
@@ -93,14 +89,10 @@ public class UserDaoDemo {
 
 ![](https://images-1259064069.cos.ap-guangzhou.myqcloud.com/images/20211010004755.png)
 
-
-
 不同 scope 的配置，Bean 创建时机不一样：
 
 1. singleton: **加载完配置文件之后会创建对象**，并添加到容器中
 2. prototype: 每 getBean 一次，创建一次对象
-
-
 
 ## Bean 生活周期配置*
 
@@ -122,12 +114,6 @@ public class UserDaoDemo {
 3. 执行初始化方法
 4. 获取到对象
 5. 执行销毁方法 (app.close())
-
-
-
-
-
-
 
 ## Bean 实例化三种方法
 
@@ -165,8 +151,6 @@ public class UserDaoDemo {
    ```
 
    
-
-
 
 ## Bean 依赖注入
 
@@ -256,9 +240,6 @@ Bean 的依赖注入的数据类型有三种：
    </bean>
    ```
 
-
-
-
 ## 抽取集合
 
 如果配一个 List 的内容在一个对象下，内容可能会很多，比较乱，可以通过 util 把 List 的内容都抽出去
@@ -305,10 +286,6 @@ public class MyBeanPost implements BeanPostProcessor {
 
 然后在配置文件中创建这个 Bean 对象即可
 
-
-
-
-
 ## 引入其他配置文件（分模块开发）
 
 实际开发中，Spring的配置内容非常多，这就导致Spring配置很繁杂且体积很大，所以可以将部分配置拆解到其他配置文件中，而在Spring主配置文件通过import标签进行加载
@@ -322,15 +299,11 @@ public class MyBeanPost implements BeanPostProcessor {
 
 ![](https://images-1259064069.cos.ap-guangzhou.myqcloud.com/images/20211011034153.png)
 
-
-
 ## ApplicationContext 的实现类
 
 1. ClassPathXmlApplicationContext：从类的根路径下加载配置文件（推荐）
 2. FileSystemXMLApplicationContext：从磁盘路径上加载配置文件，配置文件可以在磁盘任意位置
 3. AnnotationConfigApplicationContext：使用注解配置容器对象时，需要使用此类来创建 Spring 容器，用来读取注解
-
-
 
 ## getBean() 方法使用
 
@@ -350,13 +323,7 @@ public class MyBeanPost implements BeanPostProcessor {
 
    
 
-
-
-
-
 # 注解开发
-
-
 
 ## 开启路径扫描
 
@@ -415,11 +382,7 @@ public class UserServiceImpl implements UserService {
 2. Qualifier 则是通过 id 的方式从容器中进行选择，解决有多个同类型对象的问题，搭配 Autowired 使用
 3. Resource 注解也可以拿来注入，起需要给 name 属性赋一个对应的 bean 的 id，其效果和上面两个结合起来一样，但是不推荐使用，其属于 javax 包下
 
-
-
 @value注解用于原始数据类型（这里包括 String）的注入
-
-
 
 ## 完全注解开发
 
@@ -434,8 +397,6 @@ public class SpringConfig {
 ```
 
 # AOP
-
-
 
 ## AOP相关术语
 
@@ -462,8 +423,6 @@ public class SpringConfig {
 
    切面是一个动作，它就是把通知应用到切入点的过程
 
-
-
 ## AOP 操作
 
 Spring 框架一般是基于 AspectJ 实现 AOP 操作； AspectJ 不是 Spring 的组成部分，是一个独立的 AOP 框架，一般是把 Spring 框架和 Spring 框架一起使用，进行 AOP 操作
@@ -472,8 +431,6 @@ Spring 框架一般是基于 AspectJ 实现 AOP 操作； AspectJ 不是 Spring 
 
 1. 基于 xml 配置文件实现
 2. 基于注解方式实现（一般使用这种）
-
-
 
 打开注解扫描和代理对象生成，先配置命名空间：
 
@@ -552,8 +509,6 @@ public class UserProxy {
 - After
 - After Throwing
 
-
-
 ## 注解操作：抽取切入点
 
 切入点抽取：
@@ -595,8 +550,6 @@ public class SpringConfig{}
 ```
 
 # SpringTemplate
-
-
 
 ## 数据库配置文件
 
@@ -656,8 +609,6 @@ jdbc.password=123456
 
 ## 添加操作 
 
-
-
 在 DaoImpl 中执行添加操作，通过 jdbcTemplate 中的 update 方法实现，假设我们有一个 BookDaoImpl 的方法：
 
 ```java
@@ -679,13 +630,9 @@ public class BookDaoImpl implements BookDao {
 
 其中 update 方法的第一个参数是 sql 语句，第二个参数为一个可变参数，也可以是一个参数数组，以此替换到sql 语句的 "?" 
 
-
-
 ## 修改和删除（略）
 
 和添加基本一样
-
-
 
 ## 查询操作（具体值示例）
 
@@ -765,8 +712,6 @@ public void batchAddTest() {
 
 ## 批量操作（修改/删除）略
 
-
-
 # 事务
 
 事务是数据库操作最基本的单元，逻辑上的一组操作，要么全部成功；如果有一个失败则全部都失败。典型的一个使用场景就是银行转账。
@@ -777,8 +722,6 @@ public void batchAddTest() {
 2. 一致性（Consistency）：操作前后总量不变
 3. 隔离性
 4. 持久性
-
-
 
 ## 注解式事务管理
 
@@ -810,8 +753,6 @@ public void batchAddTest() {
 
 3. 将 @Transactional 注解添加到 Class 上面或者加到 Method 上面；加到 Class 上面意思是该 Class 内的所有 methods 都会开启事务；加到 Method 上面的话，只给单独的 Method 开启事务
 
-
-
 ## 注解参数（传播级别）
 
 当事务方法（对数据库有修改）被调用时，需要对其进行管理，规定是否开启事务，可以通过设置 @Transactional 中的 propagation 属性来做设置
@@ -839,8 +780,6 @@ Spring 框架有 7 种传播行为：
 
 幻读：一个未提交的事务读取到了另外一个提交的事务新添加的数据，**前后多次读取，内容总量不一致**
 
-
-
 隔离级别设置：
 
 |                      | 脏读 | 不可重复读 | 幻读 |
@@ -849,8 +788,6 @@ Spring 框架有 7 种传播行为：
 |  **READ COMMITTED**  | 没有 |     有     |  有  |
 | **REPEATABLE READ**  | 没有 |    没有    |  有  |
 |   **SERIALIZABLE**   | 没有 |    没有    | 没有 |
-
-
 
 使用示例：
 
@@ -865,11 +802,7 @@ Spring 框架有 7 种传播行为：
 3. rollbackFor：设置为哪些异常进行回滚
 4. noRollbackFor：设置不为哪些异常进行
 
-
-
 # 其他功能
-
-
 
 ## 整合日志框架
 
@@ -892,8 +825,6 @@ Spring 框架有 7 种传播行为：
 然后创建配置文件 `log4j2.xml`
 
 > 具体其他配置方式参考 https://logging.apache.org/log4j/2.x/manual/configuration.html
-
-
 
 ## 整合 JUnit4/5
 
@@ -934,8 +865,6 @@ public class JTest {}
 ```
 
 并且 @Test 注解要使用 JUnit 5 包里的
-
-
 
 # Spring WebFlux
 

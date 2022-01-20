@@ -1,6 +1,6 @@
 ---
 creation date: 2022-01-06 10:36:40
-last modified: 2022-01-07 18:07:23
+last modified: 2022-01-20 01:44:51
 title: SpringBoot
 categories:
 - spring
@@ -203,3 +203,265 @@ k:
 
 注意一点，单引号之间的内容会将特殊字符直接输出出来，会被转义，但是双引号之间的内容特殊字符会生效，不被转义。比如单引号的 `\n` ，控制台打印是 `\n`前端收到的是 `\\n`；而双引号的话，控制台会直接幻皇，前端收到的是 `\n`
 
+# Web
+
+## 静态资源访问
+
+静态资源目录可以在类路径下，起名为 `/static`, `/public`, `/reources` 等。默认情况下，在浏览器中直接访问根路径后接这些资源的文件名就可以访问到这些资源
+
+由于静态资源映射的 pattern 默认是 `/**`，所以如果我们没有手动配置 controller 或者 controller 处理不了，他就默认去直接找对应的静态资源了
+
+如果想要修改 pattern 的话，需要在配置文件中修改 `spring.mvc.static-path-pattern` ，一般推荐设置为 `/res/**`
+
+所以最终浏览器请求路径为：
+
+```
+项目 + static-path-pattern + 静态资源名
+```
+
+可以手动修改静态资源的路径（覆盖默认的），修改 `spring.resources.static-locations` 这一条参数（注意是个数组）
+
+注意：这个会影响到静态资源访问
+
+提一嘴 webjar，很多 JS，CSS 文件可以打包进 jar 包，然后装配到项目中，它自己会配置好这些文件的静态资源访问路径。
+
+https://www.webjars.org/
+
+比如引入 jQuery 的 jar，那么当项目运行之后，在 `webjars/jquery/x.x.x/jquery.js` 就可以请求的到
+
+## 欢迎页和 facicon
+
+以 `index.html` 和 `favicon.ico` 命名的文件，如果放在静态资源目录下的话，框架会自动找到这些文件并且配置上。
+
+## REST 相关
+
+原理省略，之前学过了
+
+如果想要修改 filter 拦截的 `_method` 的属性名，将其修改成自己喜欢的名字的话，可以通过配置类来实现，首先创建一个配置类，自己去配置 HiddenHttpMethodFilter
+
+```java
+@Configuration(proxyBeanMethods = false)
+public class WebConfig {
+    
+    @Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
+        hiddenHttpMethodFilter.setMethodParam("_preferred");
+        return hiddenHttpMethodFilter;
+    }
+
+}
+```
+
+## 常用参数、注解
+
+1. @PathVariable()：获取占位符中的参数数值
+
+   ```java
+   @RequestMapping("/car/{id}")
+   public Map<String, Object> getCar(@PathVariable("id") Integer id) {
+       return null;
+   }
+   ```
+
+   当然，上述方式只是单独拿到一个个参数；还有一个方式是被该注解修饰的 `Map<K,V>` 集合，里面的 key 和 value 就会对应占位符里的内容
+
+   
+
+2. @RequestHeader(): 获取请求头中的内容
+
+   ```java
+   @RequestHeader("User-Agent") String userAgent
+   ```
+
+   同样，也可以传入一个 Map、MultiValueMap 或 HttpHeaders，来获取全部的请求头内容
+
+   
+
+3. @RequestParam(): 通常这个都是用来获取 GET 请求（用 `?` 拼装的）中的参数用的，里面写 parameter name，通常对应表单中 input 标签的 name，当然它也可以获取集合参数
+
+   ```java
+   @RequestParam("age") Integer age;
+   @RequestParam("interests") List<String> interests
+   ```
+
+   当然，它也可以写 Map 集合来作为形参获取到全部参数
+
+   
+
+4. @CookieValue(): 获取 Cookie 中的某一项的值，也可以使用 Cookie 来接
+
+   
+
+5. @RequestBody: 可以用 String 来接，获取到全部请求体的内容；如果想通过对象的方式获取请求体的话，不使用这个注解，然后使用 RequestEntity 作为形参
+
+   
+
+6. @RequestAttribute: 获取 request 域对象中的某个属性，一般是在 forward 之后的那个控制方法中通过这个注解获取到同一次请求中的 request 域对象中的某个属性
+
+   
+
+7. @MatrixVariable: 获取矩阵变量，参数在 URL 中用分号分开，可以当 cookie 被禁用的时候，使用这种方式来获取到 cookie 值（这个不展开说了）
+
+   **注意：SpringBoot 默认禁用了获取矩阵变量的功能**
+
+# 数据访问
+
+## 配置数据源
+
+先导入 JDBC 场景
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jdbc</artifactId>
+</dependency>
+```
+
+然后导入数据库驱动，注意版本匹配：
+
+1. 可以直接引入想要的版本的坐标
+2. 在 pom 文件的 properties 标签中，添加 <mysql.version> 来设置
+
+```xml
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.49</version>
+</dependency>
+```
+
+然后配置 yaml 文件：
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_db?useSSL=false
+    username: 
+    password: 
+    driver-class-name: com.mysql.jdbc.Driver
+```
+
+此时，我们已经可以使用 JdbcTemplate 了
+
+## 配置 Druid
+
+先说一遍手动配置，引入依赖：
+
+```xml
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid</artifactId>
+    <version>1.2.8</version>
+</dependency>
+```
+
+然后创建配置类：
+
+```java
+@Configuration
+public class DataSourceConfig {
+
+    // 这个会优于默认的 Hikari 创建并替换
+    @Bean
+    @ConfigurationProperties("spring.datasource")
+    public DataSource dataSource() throws SQLException {
+        DruidDataSource druidDataSource = new DruidDataSource();
+        // 开启统计功能
+        druidDataSource.setFilters("stat");
+        return druidDataSource;
+    }
+
+    // 开启 Druid 监控页面
+    @Bean
+    public ServletRegistrationBean<StatViewServlet> statViewServlet() {
+        StatViewServlet svs = new StatViewServlet();
+        return new ServletRegistrationBean<StatViewServlet>(svs, "/druid/*");
+    }
+
+}
+```
+
+有很多设置都需要手动一个个加入，一个个开启，麻烦，所以还可以引入官方给的 starter
+
+```xml
+<dependency>
+   <groupId>com.alibaba</groupId>
+   <artifactId>druid-spring-boot-starter</artifactId>
+   <version>1.1.17</version>
+</dependency>
+```
+
+之后在 spring.datasource 配置下，会多出一个 druid 的配置项：
+
+```yaml
+spring:
+  datasource:
+	# url, username, password, ....
+    druid:
+      filters: stat
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin
+
+      web-stat-filter:
+        enabled: true
+
+```
+
+更多配置参考官方文档：
+
+https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+
+https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98
+
+## 配置 MyBatis
+
+```xml
+<dependency>
+	<groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>2.2.1</version>
+</dependency>
+```
+
+之后配置一下 mapper 文件的路径，开启驼峰命名
+
+```yaml
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*xml
+  configuration:
+    map-underscore-to-camel-case: true
+```
+
+之后创建对应 Bean 对象的 Mapper
+
+```java
+@Mapper
+public interface CityMapper {
+
+    @Select("select * from city where id = #{id}")
+    public City getCityById(Long id);
+
+}
+```
+
+通过注解的方式类来实现 SQL 语句，如果是很复杂的，可以写一个对应的 mapper 的 xml 文件，xml 文件大概格式如下：
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 写对应 mapper 接口的全类名 -->
+<mapper namespace="">
+	<!-- id 为 mapper 中的方法名 -->
+    <select id="" resultType="">
+        
+    </select>
+</mapper>
+```
+
+## MyBatis-Plus

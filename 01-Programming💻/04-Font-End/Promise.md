@@ -1,6 +1,6 @@
 ---
 creation date: 2021-12-14 16:23
-last modified: 2021-12-18 00:15:43
+last modified: 2021-12-18 00:21:16
 title: Promise
 categories:
 - front-end
@@ -10,8 +10,6 @@ tags:
 ---
 
 Promise 为异步编程的一种解决方案，在网络请求中很常见，其可以很明确的逻辑处理请求的数据
-
-
 
 # 基本使用
 
@@ -30,11 +28,7 @@ new Promise((resolve, reject) => {
 })
 ```
 
-
-
 在判断结果之后，来选择调用 resolve 或者是 reject，resolve 之后会进入到下一个 then 中处理结果；若期间有错误发成（reject被调用），则会进入到下一个 catch 中来处理异常
-
-
 
 # 多层处理
 
@@ -71,8 +65,6 @@ new Promise((resolve, reject) => {
 })
 ```
 
-
-
 # 链式简写
 
 在多层处理中，通过新建一个 Promise 然后获取 resolve 或 reject 的方式有点麻烦，代码看着很乱，所以有两个简写的方式，本质是一样的
@@ -96,8 +88,6 @@ new Promise((resolve, reject) => {
 })
 ```
 
-
-
 直接 return/throw 的方式来进入下一层操作
 
 ```javascript
@@ -116,8 +106,6 @@ new Promise((resolve, reject) => {
   console.log(err)
 })
 ```
-
-
 
 # Promise 的 all 方法
 
@@ -142,26 +130,4 @@ Promise.all([
   console.log(results);
 })
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,6 +1,6 @@
 ---
 creation date: 2021-11-27 12:20:48
-last modified: 2021-12-27 07:24:49
+last modified: 2022-01-06 10:29:58
 title: SpringMVC
 categories:
 - back-end
@@ -755,8 +755,6 @@ RESTFul 是一种风格，全程为 Representational State Transfer，用一图�
 
 https://github.com/BlckKn1fe/restful-demo
 
-
-
 ## 访问静态资源
 
 由于 DispatcherServlet 处理的 URL 路径是 `/`，所以它会覆盖 Tomcat 本身默认的 DefaultServlet 处理的路径，这就导致请求静态资源的时候，这个请求被 DispatcherServlet 接收了，但是它没法处理静态资源。
@@ -767,8 +765,6 @@ https://github.com/BlckKn1fe/restful-demo
 <mvc:default-servlet-handler />
 <mvc:annotation-driven />
 ```
-
-
 
 # HttpRequestConverter
 
@@ -795,8 +791,6 @@ public String testRequestBody(@RequestBody String requestBody){
     return "success";
 }
 ```
-
-
 
 ## RequestEntity
 
@@ -837,8 +831,6 @@ public String testResponseBody(){
 </dependency>
 ```
 
-
-
 在SpringMVC的核心配置文件中开启mvc的注解驱动，此时在 HandlerAdaptor 中会自动装配一个消息转换器：MappingJackson2HttpMessageConverter，可以将响应到浏览器的Java对象转换为Json格式的字符串
 
 ```
@@ -857,8 +849,6 @@ public User testResponseUser(){
 }
 ```
 
-
-
 ## @RestController 注解
 
 @RestController 注解是 springMVC 提供的一个复合注解，标识在**控制器的类上**，就相当于为类添加了 @Controller 注解，并且为其中的每个方法添加了@ResponseBody 注解
@@ -868,6 +858,4 @@ public User testResponseUser(){
 ResponseEntity用于控制器方法的返回值类型，该控制器方法的返回值就是响应到浏览器的响应报文
 
 ## 文件上传与下载
-
-
 
