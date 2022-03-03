@@ -90,6 +90,7 @@ class AnotherWidget extends StatelessWidget {
 2. textAlign
 3. overflow
 4. textScaleFactor
+4. maxLine: 这个很关键，如果设置 overflow 的话，如果只显示一行的时候需要设置这个
 
 ## 图片组件
 
@@ -389,11 +390,219 @@ Positioned 和 Align 差不多，只不过变成了要设置上下左右四个�
 
 
 
+## StatefulWidget
+
+这东西简单来说就是，它会监听变量的变化，和 Vue 基本一样，只要变量发生变化，页面就会重新渲染，但是，Flutter 这面必须使用 Stateful Widget 提供的一个全局方法 `setState() {}` 来操作成员变量
+
+```dart
+ElevatedButton(
+  child: Text("Button"),
+  onPress: () {
+    setState() {
+    
+    }
+  }
+)
+```
+
+
+
+## BottomNavigationBar 组件
+
+这个来设置导航栏，主要需要设置以下三个属性：
+
+1. currentIndex: 通过在组件内部声明一个 `_currentIndex` 变量来追踪 bar 选到第几个
+2. onTap: 设置点击不同的 bar item 之后执行的方法，其中形参需要有一个 int 来接 index
+3. items: 一个数组，里面要存的是 `BottomNavigationBarItem`，它里面设置 icon 和 lable
+4. (iconSize)
+5. (fixedColor)
+
+我们可以通过在组件内部创建一个 `_pageList` 的方式存不同的页面，然后在 body 上设置 `_pageLisy[_currentIndex]`的方式来切换页面
+
+
+
+# 路由
+
+如果是页面的跳转的话，新的页面记得用 Scaffold 重新包裹上
+
+首页是 Navigation Bar 的不同点击切换不同的 Widget，并不是切换不同的页面！而跳转到新的页面的话需要 return 的是一个完整的 Scaffold
+
+
+
+## 普通路由
+
+通过调用 `Navigator.push()` 的方法来实现页面的基本跳转，其中第一个参数为 context，第二个参数需要给一个 `MaterialPageRoute` 组件，这个组件里设置一个 builder 属性
+
+```dart
+Navigator.push(
+    context, 
+    MaterialPageRoute(builder: (context) => CustomerLogin())
+);
+// 本质上和 Navigator.of(context).push() 是一样的
+```
+
+ 
+
+## 跳转传值
+
+如果想给跳转的页面传值的话，给对应的页面一个构造函数，然后函数里的参数可以给一些默认值，然后都设置成可选的命名参数就行了
+
+
+
+## 命名路由
+
+需要在入口的地方，给 MaterialApp 组件配置 routes 属性，是以键值对的形式
+
+```dart
+routes: {
+  '/': (context) => Index(),
+  '/demoPage': (context) => DemoPage()
+}
+```
+
+形式大概是这样的
+
+
+
+## 命名路由传参问题
+
+首先需要在 Material 顶层配置一下 `onGenerateRoute` 属性，虽然不知道这东西是干什么的，但是感觉是用来监听全局的路由转发用的
+
+```dart
+onGenerateRoute: (RouteSettings settings) {
+  // settings.name 就是 route 路径
+  final String? name = settings.name;
+  // 要在主页创建一个叫 routes 的成员变量来管理路由，而不是配置 routes 属性
+  // 然后通过 routes[name] 的方式拿到页面的构造函数
+  final Function pageContentBuilder = this.routes[name] as Function;
+  // 先判断是否正确获取
+  if (pageContentBuilder != null) {
+    // 此时确定该页面是存在的，那么判断监听到的路由跳转中是否存在 arguments 参数
+    if (settings.arguments != null) {
+      // 如果有参数的话，就把 arguments 封装给可选命名参数
+      // 这一步相当于我们全局手动覆盖重写
+      final Route route = MaterialPageRoute(
+        // 这个 pageContentBuilder 实际上就是要跳转页面的构造函数！！
+        // 通过 builder 来实现给它的命名参数 argument 赋值
+        builder: (context) => pageContentBuilder(context, arguments: settings.arguments)
+      );
+      // 把这个 MaterialPageRoute return 出去
+      return route;
+    }
+    else {
+      final Route route = MaterialPageRoute(
+        builder: (context) => pageContentBuilder(context)
+      );
+      return route;
+    }
+  }
+}
+```
+
+并且对应的 `routes` 变量中，也要写上正确的构造函数：
+
+```dart
+final routes = {
+    "/form": (context, {arguments}) => MyForm(arguments: arguments)
+};
+```
+
+然后当页面跳转并且我们想要传参的时候，给一个 arguments 参数：
+
+```dart
+child: ElevatedButton(
+  child: Text("Navigate to Form page"),
+  onPressed: () {
+    // 参数以键值对的形式存在
+    Navigator.pushNamed(context, "/form", arguments: {
+      "msg": "Hello World!"
+    });
+  },
+)
+```
+
+而在跳转的页面想要接受到参数的话，在构造函数里添加即可（这里以 Stateful 为例）
+
+```dart
+class Form extends StatefulWidget {
+  var arguments;
+  Form({Key? key, this.arguments}) : super(key: key);
+
+  @override
+  _FormState createState() => _FormState();
+}
+```
+
+想获取到这个 arguments 的话，通过 `widget.arguments` 的方式就能拿得到（注意参数是以键值对的形式存在，所以获取参数值的话是 `arguments["msg"]` 的方式
 
 
 
 
 
+# 表单
+
+
+
+## 文本框
+
+表单中可以设置的属性
+
+1. onChanged: 触发一个回调函数，当文本内容发生改变的时候，可以配合 controller 来获取文本框内内容，它的回调函数里有个 value 参数
+
+   ```dart
+   onChanged: (value) {
+     setState(() {
+       usernameController.text = value;
+     })；
+   }
+   ```
+
+2. decoration: 可以给一个 InpurtDecoration 
+
+   1. hintText: 和 placeholder 一样
+   2. border: OutlineInputBoarder
+   3. lableText: 设置 lable
+   4. lableStyle: 设置 lable 样式
+   5. icon: 可以在文本框前面加一个 icon
+
+3. obscureText: 为 true 的话文本框就会变成密码框
+
+4. controller: **结合 TextEditingController 配置表单中默认的内容；也用来获取表单中的内容**
+
+
+
+用 Controller 的话，对应表单的字段去创建对应的 Controller，比如设置用户名的话就可以创建一个：
+
+```dart
+TextEditingController usernameController = TextEditingController();
+```
+
+给它默认赋值的话，可以调用组件的生命周期的回调函数 `initState` 方法
+
+```dart
+@override
+void initState() {
+  super.initState();
+  usernameController.text = "admin";
+}
+```
+
+
+
+## 多选
+
+先说 CheckBox 组件，这就是一个单选的 box，点了就勾选上，常见属性
+
+1. value: true or false
+2. onChange: 回调函数默认有个参数，是用来接收变化之后的 box 的选中状态的
+
+
+
+CheckboxListTile 在此基础上有了 title 和 subtitle 属性，长这样：
+
+![image-20220209130000590](https://images-1259064069.cos.ap-guangzhou.myqcloud.com/images/image-20220209130000590.png)
+
+secondary 属性可以配置一个图片或者图标
 
 
 

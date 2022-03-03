@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "01-Programming💻/05-Dart/Flutter 快速入门.md",
+            "file": "01-Programming💻/06-通用/Shell.md",
             "mode": "source",
             "source": false
           }
@@ -83,7 +83,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01-Programming💻/05-Dart/Flutter 快速入门.md",
+                "file": "01-Programming💻/06-通用/Shell.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01-Programming💻/05-Dart/Flutter 快速入门.md"
+                "file": "01-Programming💻/06-通用/Shell.md"
               }
             }
           },
@@ -132,6 +132,7 @@
   },
   "active": "5aadc4885f4f5861",
   "lastOpenFiles": [
+    "01-Programming💻/06-通用/Shell.md",
     "01-Programming💻/05-Dart/Flutter 快速入门.md",
     "01-Programming💻/05-Dart/Dart 快速入门.md",
     "01-Programming💻/01-Java/00-Java-Dashboad.md",
@@ -140,7 +141,6 @@
     "01-Programming💻/06-通用/XML快速入门.md",
     "01-Programming💻/06-通用/Ubuntu配置.md",
     "01-Programming💻/06-通用/MySQL基础.md",
-    "01-Programming💻/06-通用/haskell.md",
-    "01-Programming💻/06-通用/Git.md"
+    "01-Programming💻/06-通用/haskell.md"
   ]
 }

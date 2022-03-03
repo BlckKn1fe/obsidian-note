@@ -8,5 +8,6 @@
   "templater-obsidian",
   "table-editor-obsidian",
   "media-extended",
-  "mx-bili-plugin"
+  "mx-bili-plugin",
+  "cm-editor-syntax-highlight-obsidian"
 ]
