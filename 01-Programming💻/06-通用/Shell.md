@@ -1,6 +1,6 @@
 ---
 creation date: 2022-03-03 00:10:39
-last modified: 2022-03-03 02:17:24
+last modified: 2022-03-03 02:17:27
 title: Shell
 categories:
 - linux

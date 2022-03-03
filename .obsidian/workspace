@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "01-Programming💻/06-通用/Shell.md",
+            "file": "00-Days📅/day_template.md",
             "mode": "source",
             "source": false
           }
@@ -83,7 +83,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "01-Programming💻/06-通用/Shell.md",
+                "file": "00-Days📅/day_template.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "01-Programming💻/06-通用/Shell.md"
+                "file": "00-Days📅/day_template.md"
               }
             }
           },
@@ -132,6 +132,8 @@
   },
   "active": "5aadc4885f4f5861",
   "lastOpenFiles": [
+    "00-Days📅/day_template.md",
+    "README.md",
     "01-Programming💻/06-通用/Shell.md",
     "01-Programming💻/05-Dart/Flutter 快速入门.md",
     "01-Programming💻/05-Dart/Dart 快速入门.md",
@@ -139,8 +141,6 @@
     "01-Programming💻/01-Java/MyBatis.md",
     "01-Programming💻/02-Spring/SpringBoot.md",
     "01-Programming💻/06-通用/XML快速入门.md",
-    "01-Programming💻/06-通用/Ubuntu配置.md",
-    "01-Programming💻/06-通用/MySQL基础.md",
-    "01-Programming💻/06-通用/haskell.md"
+    "01-Programming💻/06-通用/Ubuntu配置.md"
   ]
 }
